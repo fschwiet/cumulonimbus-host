@@ -1,0 +1,31 @@
+
+
+sites/  (has git repository)
+sites/deploy.sh
+sites/run.sh
+sites/siteName  (is own .git repository)
+sites/siteName/src              (.gitignored from config project)
+          prerun.sh
+            - npm rebuild
+            - migrations
+          run.sh
+            - switch over pm2
+sites/siteName/deploys/gitId   (.gitignore from config project)
+sites/siteName/deploy (links to current deploy, .gitignore from config project)
+sites/siteName/config.json
+
+
+sites/run.sh
+  makes sure all of sites/siteName/src/run.sh are running in pm2, with pm2 identity siteName
+
+sites/deploy.sh <siteName> (outer deploy script)
+  git check no changes in .  (unless -c)
+  git pull latest in . (unless -c)
+  git check no changes in src (unless -f)
+  git pull latest in src  (unless -f)
+  verify there is a prerun.sh, run.sh script
+  uses tar to copy current branch to deploy directory
+    - directory is named after gitId, [has changes], with an attempt postfix
+  copies config file
+  runs prerun.sh
+  if successful, updates the deploy directory link and reloads PM2
