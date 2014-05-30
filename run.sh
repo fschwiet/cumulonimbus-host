@@ -8,6 +8,7 @@ for directory in ./sites/*; do
     	echo $siteName
 
         # how will directory switching happen?
+        #  maybe pm2 runs a shell expression "cd /link; ./run.sh"
 
     	# start testing in a vagrant VM with node / pm2
 
