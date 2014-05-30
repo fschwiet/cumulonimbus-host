@@ -9,8 +9,7 @@ for directory in ./sites/*; do
 
         # how will directory switching happen?
 
-    	# to detect if runnning, pipe result of pm2 prettyList to a node script.
-
+    	# start testing in a vagrant VM with node / pm2
 
     	if [ $(ps -e -o cmd | grep pm2 | grep $siteName | grep -v grep | wc -l | tr -s "\n") -eq 0 ]
 		then
