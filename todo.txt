@@ -1,5 +1,3 @@
-
-
 sites/siteName  (is own .git repository)
 sites/siteName/src              (.gitignored from config project)
 sites/siteName/deploys/gitId   (.gitignore from config project)
@@ -21,6 +19,7 @@ host/deploy.sh <siteName> (outer deploy script)
   copies config file
   runs prerun.sh
   if successful, updates the deploy directory link and reloads PM2
+    - how to update deploy directory?  pm2?
 
 project/prerun.sh
   - npm rebuild

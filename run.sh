@@ -14,19 +14,8 @@ for directory in ./sites/*; do
 
     	if [ $(ps -e -o cmd | grep pm2 | grep $siteName | grep -v grep | wc -l | tr -s "\n") -eq 0 ]
 		then
-		echo "lol"
-			cd ./sites/$siteName/src; 
-			pwd;
-			pm2 start ./run.sh --name $siteName --user wwwuser --interpreter bash
+			cd ./sites/$siteName; 
+			./run.sh
 		fi
   	fi
 done
-
-
-# note:  limited environment variables available within this crontab script.
-#   In particular, $PATH is not set.
-
-#if [ $(ps -e -o cmd | grep pm2 | grep hello-server | grep -v grep | wc -l | tr -s "\n") -eq 0 ]
-#then
-#	cd /sites/www; /usr/local/bin/pm2 start hello-server.js --user wwwuser
-#fi
