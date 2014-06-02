@@ -7,8 +7,20 @@ sites/siteName/deploy (links to current deploy, .gitignore from config project)
 sites/siteName/config.json
 
 
-host/run.sh
-  makes sure all of sites/siteName/src/run.sh are running in pm2, with pm2 identity siteName
+
+to detect if there are git changeS: 
+
+a=$(git status --porcelain)
+
+if [ ${a:+1} ];
+then
+  echo "was true"
+else
+  echo "was false"
+fi
+
+
+
 
 host/deploy.sh <siteName> (outer deploy script)
   git check no changes in .  (unless -c)
@@ -22,6 +34,15 @@ host/deploy.sh <siteName> (outer deploy script)
   runs prerun.sh
   if successful, updates the deploy directory link and reloads PM2
     - how to update deploy directory?  pm2?
+
+
+host/run.sh 
+  makes sure all of sites/siteName/deploy/run.sh are running in pm2, with pm2 identity siteName
+
+set up cron to run run.sh in vagrantfile
+
+
+
 
 project/prerun.sh
   - npm rebuild
