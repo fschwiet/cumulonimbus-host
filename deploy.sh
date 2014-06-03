@@ -29,3 +29,20 @@ then
 	echo "There are uncommitted changes in cumulonimbus-host."
 	exit
 fi
+
+src_to_deploy=./sites/$1
+
+if ! [ -d $src_to_deploy ]
+then
+	echo "Unable to find site to deploy at $src_to_deploy"
+fi
+
+if ! [ -s $src_to_deploy/prerun.sh ]
+then
+	echo "Expected to find file $src_to_deploy/prerun.sh"
+fi
+
+if ! [ -s $src_to_deploy/run.sh ]
+then
+	echo "Expected to find file $src_to_deploy/run.sh"
+fi
