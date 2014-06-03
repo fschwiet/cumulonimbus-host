@@ -11,7 +11,7 @@ function is_git_unclean {
 		change_count=$(git status --porcelain | wc -l)
 		popd > /dev/null
 
-		if (($change_count > 0)) 
+		if [ "$change_count" -gt 0 ] 
 		then
 			true
 		else
@@ -26,7 +26,7 @@ function is_git_unclean {
 echo ${1:?"The first parameter indicating what site to deploy was missing."} > /dev/null
 
 if is_git_unclean .
-else
+then
 	echo "There are uncommitted changes in cumulonimbus-host."
 	exit
 fi
