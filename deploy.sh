@@ -66,15 +66,43 @@ then
 	mkdir ./deploys
 fi
 
+if ! [ -d ./deploys/$name_of_site ] 
+then
+	mkdir ./deploys/$name_of_site
+fi
+
 commit_id=$(git --git-dir $src_to_deploy/.git rev-parse master)
 dir_index=0
 
-while [ -d ./deploys/${commit_id}_${dir_index} ]
+while [ -d ./deploys/$name_of_site/${commit_id}_${dir_index} ]
 do
 	((dir_index++))
 done
 
-deploy_target=./deploys/${commit_id}_${dir_index}
+deploy_target=./deploys/$name_of_site/${commit_id}_${dir_index}
 
 mkdir $deploy_target
 git --git-dir $src_to_deploy/.git archive --format=tar $commit_to_deploy | tar --extract -C $deploy_target
+
+
+# allow for symbolic links in windows
+CYGWIN=winsymlinks:native
+
+pushd $deploy_target
+
+if ! $deploy_target/prerun.sh
+then
+	popd
+	echo "Failure running $deploy_target/prerun.sh"
+	exit 1
+fi
+
+ln -s $deploy_target ./deploys/$name_of_site/current
+
+if ! $deploy_target/run.sh
+then
+	popd
+	echo "Failure running $deploy_target/prerun.sh"
+	exit 1
+fi
+
