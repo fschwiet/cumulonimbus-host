@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-function is_git_empty {
+function is_git_unclean {
 	
 	git_directory=$1
 
@@ -22,6 +22,10 @@ function is_git_empty {
 	fi
 }
 
+echo ${1:?"The first parameter indicating what site to deploy was missing."} > /dev/null
 
-echo "host: $(is_git_empty 'c:/src/cumulonimbus-host')"
-echo "host: $(is_git_empty 'c:/src/cumulonimbus-host/sites/cumulonimbus-project')"
+if $(is_git_unclean .)
+then
+	echo "There are uncommitted changes in cumulonimbus-host."
+	exit
+fi
