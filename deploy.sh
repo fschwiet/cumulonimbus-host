@@ -28,6 +28,8 @@ commit_to_deploy=${2:-"master"}
 
 if is_git_unclean .
 then
+	:
+else
 	echo "There are uncommitted changes in cumulonimbus-host."
 	exit
 fi
@@ -82,25 +84,29 @@ deploy_target=./deploys/$name_of_site/${commit_id}_${dir_index}
 mkdir $deploy_target
 git --git-dir $src_to_deploy/.git archive --format=tar $commit_to_deploy | tar --extract -C $deploy_target
 
+pushd $deploy_target > /dev/null
 
-# allow for symbolic links in windows
-CYGWIN=winsymlinks:native
-
-pushd $deploy_target
-
-if ! $deploy_target/prerun.sh
+if ! ./prerun.sh
 then
-	popd
+	popd > /dev/null
 	echo "Failure running $deploy_target/prerun.sh"
 	exit 1
 fi
 
-ln -s $deploy_target ./deploys/$name_of_site/current
+popd > /dev/null
+
+if ! ln -s "$deploy_target" ./deploys/$name_of_site/current
+then
+	echo "Unable to create symbolic link."
+	exit
+fi
+
+pushd ./deploys/$name_of_site/current > /dev/null
 
 if ! $deploy_target/run.sh
 then
-	popd
-	echo "Failure running $deploy_target/prerun.sh"
+	popd > /dev/null
+	echo "Failure running $deploy_target/run.sh"
 	exit 1
 fi
 
