@@ -28,8 +28,6 @@ commit_to_deploy=${2:-"master"}
 
 if is_git_unclean .
 then
-	:
-else
 	echo "There are uncommitted changes in cumulonimbus-host."
 	exit
 fi
