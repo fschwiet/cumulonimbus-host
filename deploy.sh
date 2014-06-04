@@ -78,6 +78,7 @@ do
 done
 
 deploy_target=./deploys/$name_of_site/${commit_id}_${dir_index}
+deploy_link=./deploys/$name_of_site/current
 
 mkdir $deploy_target
 git --git-dir $src_to_deploy/.git archive --format=tar $commit_to_deploy | tar --extract -C $deploy_target
@@ -93,7 +94,12 @@ fi
 
 popd > /dev/null
 
-if ! ln -s "$deploy_target" ./deploys/$name_of_site/current
+if [ -h "$deploy_link" ]
+then
+	rm "$deploy_link"
+if
+
+if ! ln -s "$deploy_target" "$deploy_link"
 then
 	echo "Unable to create symbolic link."
 	exit
