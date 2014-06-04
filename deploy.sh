@@ -97,7 +97,7 @@ popd > /dev/null
 if [ -h "$deploy_link" ]
 then
 	rm "$deploy_link"
-if
+fi
 
 if ! ln -s "$deploy_target" "$deploy_link"
 then
