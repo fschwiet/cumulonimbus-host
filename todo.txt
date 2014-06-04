@@ -7,37 +7,10 @@ sites/siteName/deploy (links to current deploy, .gitignore from config project)
 sites/siteName/config.json
 
 
+account wwwwuser fails to run pm2 since it doesn't have a home directory
 
-to detect if there are git changeS: 
+Can't log in as wwwuser, though can sudo su wwwwuser  
 
-a=$(git status --porcelain)
-
-if [ ${a:+1} ];
-then
-  echo "was true"
-else
-  echo "was false"
-fi
-
-
-
-
-host/deploy.sh <siteName> (outer deploy script)
-  git check no changes in .  (unless -c)
-  git pull latest in . (unless -c)
-  git check no changes in src (unless -f)
-  git pull latest in src  (unless -f)
-  verify there is a prerun.sh, run.sh script
-  uses tar to copy current branch to deploy directory
-    - directory is named after gitId, [has changes], with an attempt postfix
-  copies config file
-  runs prerun.sh
-  if successful, updates the deploy directory link and reloads PM2
-    - how to update deploy directory?  pm2?
-
-
-host/run.sh 
-  makes sure all of sites/siteName/deploy/run.sh are running in pm2, with pm2 identity siteName
 
 set up cron to run run.sh in vagrantfile
 

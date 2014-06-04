@@ -48,6 +48,21 @@ Vagrant.configure("2") do |config|
 	installNodejs config.vm
 
 	config.vm.provision "shell", inline: "sudo npm install pm2 -g"
+
+	config.vm.provision "shell", inline: <<-EOF
+		sudo useradd wwwuser
+		sudo mkdir /cumulonimbus
+		sudo chown wwwuser /cumulonimbus
+		sudo su wwwuser
+		git clone http://github.com/fschwiet/cumulonimbus-host /cumulonimbus
+		sudo mkdir /cumulonimbus/sites
+
+		echo "Next, run:"
+		echo "    sudo su wwwuser"
+		echo "    git clone http://github.com/fschwiet/cumulonimbus-project /cumulonimbus/sites/sample"
+		echo "    cd /cumulonimbus"
+		echo "    ./deploy.sh sample"
+	EOF
 end
 
 
