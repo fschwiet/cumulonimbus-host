@@ -1,13 +1,13 @@
 
 
-sites/siteName  (is own .git repository)
-sites/siteName/src              (.gitignored from config project)
-sites/siteName/deploys/gitId   (.gitignore from config project)
-sites/siteName/deploy (links to current deploy, .gitignore from config project)
-sites/siteName/config.json
-
-
 account wwwwuser fails to run pm2 since it doesn't have a home directory
+
+
+project/run.sh
+  - create pm2 task if it doesn't exist
+  - restart pm2 task
+
+
 
 Can't log in as wwwuser, though can sudo su wwwwuser  
 
@@ -20,5 +20,5 @@ set up cron to run run.sh in vagrantfile
 project/prerun.sh
   - npm rebuild
   - migrations
-project/run.sh
-  - run the site
+
+  
