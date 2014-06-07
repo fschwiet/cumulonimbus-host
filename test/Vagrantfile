@@ -52,7 +52,7 @@ Vagrant.configure("2") do |config|
 	config.vm.provision "shell", inline: <<-EOF
 		sudo useradd -m -c "Web Applications Account" wwwuser
 		sudo mkdir /cumulonimbus
-		sudo chown wwwuser /cumulonimbus
+		sudo chown --recursive wwwuser /cumulonimbus
 		sudo su wwwuser
 		git clone http://github.com/fschwiet/cumulonimbus-host /cumulonimbus
 		sudo mkdir /cumulonimbus/sites
