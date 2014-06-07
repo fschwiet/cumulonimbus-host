@@ -50,12 +50,11 @@ Vagrant.configure("2") do |config|
 	config.vm.provision "shell", inline: "sudo npm install pm2 -g"
 
 	config.vm.provision "shell", inline: <<-EOF
-		sudo useradd -m -c "Web Applications Account" wwwuser
+		sudo useradd -m -c "Web Applications Account" -p $(openssl passwd -1 "password") wwwuser
 		sudo mkdir /cumulonimbus
-		sudo chown --recursive wwwuser /cumulonimbus
-		sudo su wwwuser
 		git clone http://github.com/fschwiet/cumulonimbus-host /cumulonimbus
-		sudo mkdir /cumulonimbus/sites
+		mkdir /cumulonimbus/sites
+		sudo chown --recursive wwwuser:wwwuser /cumulonimbus
 
 		echo "Next, run:"
 		echo "    sudo su wwwuser"
