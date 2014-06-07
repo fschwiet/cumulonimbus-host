@@ -77,8 +77,8 @@ do
 	((dir_index++))
 done
 
-deploy_target=./deploys/$name_of_site/${commit_id}_${dir_index}
-deploy_link=./deploys/$name_of_site/current
+daploy_last_path=${commit_id}_${dir_index}
+deploy_target=./deploys/$name_of_site/$daploy_last_path
 
 mkdir $deploy_target
 git --git-dir $src_to_deploy/.git archive --format=tar $commit_to_deploy | tar --extract -C $deploy_target
@@ -94,18 +94,28 @@ fi
 
 popd > /dev/null
 
-if [ -h "$deploy_link" ]
-then
-	rm "$deploy_link"
-fi
 
-if ! ln -s "$deploy_target" "$deploy_link"
-then
-	echo "Unable to create symbolic link."
-	exit
-fi
+pushd ./deploys/$name_of_site/ > /dev/null
 
-pushd ./deploys/$name_of_site/current > /dev/null
+	if [ -h current ]
+	then
+		rm current
+	fi
+
+
+	if ! ln -s "$daploy_last_path" current
+	then
+		popd > /dev/null
+		echo "Unable to create symbolic link."
+		exit 1
+	fi
+popd > /dev/null
+
+if ! pushd ./deploys/$name_of_site/current
+then
+	echo "Did not find current deployment"
+	exit 1
+fi
 
 if ! $deploy_target/run.sh
 then
