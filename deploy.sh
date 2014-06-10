@@ -40,6 +40,8 @@ then
 	exit 1
 fi
 
+src_to_deploy=$(realpath $src_to_deploy)
+
 if is_git_unclean $src_to_deploy
 then
 	echo "There are uncommitted changes in $src_to_deploy."
@@ -77,39 +79,41 @@ do
 	((dir_index++))
 done
 
-daploy_last_path=${commit_id}_${dir_index}
-deploy_target=./deploys/$name_of_site/$daploy_last_path
+deploy_target=$(realpath ./deploys/$name_of_site)/${commit_id}_${dir_index}
+deploy_link=$(realpath ./deploys/$name_of_site)/current
 
 mkdir $deploy_target
 git --git-dir $src_to_deploy/.git archive --format=tar $commit_to_deploy | tar --extract -C $deploy_target
 
-pushd $deploy_target > /dev/null
 
-if ! ./prerun.sh
+if ! pushd $deploy_target > /dev/null
 then
-	popd > /dev/null
-	echo "Failure running $deploy_target/prerun.sh"
 	exit 1
 fi
 
-popd > /dev/null
-
-
-pushd ./deploys/$name_of_site/ > /dev/null
-
-	if [ -h current ]
-	then
-		rm current
-	fi
-
-
-	if ! ln -s "$daploy_last_path" current
+	if ! ./prerun.sh
 	then
 		popd > /dev/null
-		echo "Unable to create symbolic link."
+		echo "Failure running $deploy_target/prerun.sh"
 		exit 1
 	fi
+
 popd > /dev/null
+
+
+if [ -h $deploy_link ]
+then
+	rm $deploy_link
+fi
+
+
+if ! ln -s $deploy_target $deploy_link
+then
+	popd > /dev/null
+	echo "Unable to create symbolic link."
+	exit 1
+fi
+
 
 if ! pushd ./deploys/$name_of_site/current
 then
@@ -117,10 +121,13 @@ then
 	exit 1
 fi
 
-if ! $deploy_target/run.sh
-then
-	popd > /dev/null
-	echo "Failure running $deploy_target/run.sh"
-	exit 1
-fi
+	if ! $deploy_target/run.sh
+	then
+		popd > /dev/null
+		echo "Failure running $deploy_target/run.sh"
+		exit 1
+	fi
+
+popd > /dev/null
+
 

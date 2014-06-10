@@ -2,11 +2,9 @@
 
 for directory in ./sites/*; do
  
-	siteName=$(basename $directory)
+  	if [ -d "$directory/current" ]; then
 
-  	if [ -d "$directory" ]; then
-
-		cd ./sites/$siteName; 
+		cd $directory/current; 
 		./run.sh
   	fi
 done
