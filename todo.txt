@@ -1,12 +1,4 @@
-wwwuser@vagrant:/cumulonimbus$ ./deploy.sh sample
-./deploy.sh: line 108: pushd: ./deploys/sample/current: No such file or directory
-Initializing folder for pm2 on /home/wwwuser/.pm2
-Creating PM2 configuration file in /home/wwwuser/.pm2/custom_options.sh
-{ online: true, success: true, pid: 10088, pm2_version: '0.8.15' }
-PM2 [ERROR] script not found : /cumulonimbus/src/hello-server.js
-./deploy.sh: line 112: popd: directory stack empty
-Failure running ./deploys/sample/c78a244f15f6c113de94ba5e46202a5ec7d7db71_0/run.sh
-
+site not running after vagrant reload
 
 
 project/run.sh
