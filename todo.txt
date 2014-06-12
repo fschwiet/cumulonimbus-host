@@ -1,5 +1,8 @@
 cron job is running as root, not wwwuser.
-
+  - testing, it works to copy the cron file from /var/spool/cron/crontabs/root to wwwuser, but we don't want to move all of roots cron if there are others
+  - we should be able to write the file directly to /var/spool/cron/crontabs/wwwuser, but that didn't seem to work (try again)
+  - watch http://serverfault.com/questions/604720/can-i-use-reboot-in-cron-d-files
+  
 
 project/run.sh
   - create pm2 task if it doesn't exist
