@@ -1,19 +1,15 @@
-site not running after vagrant reload
+vagrant@vagrant:~$ cat /var/log/cronrun
+./run.sh: 3: ./run.sh: pm2: not found
+
+
+why is crontab still being updated for root?
+
+
 
 
 project/run.sh
   - create pm2 task if it doesn't exist
   - restart pm2 task
-
-
-
-Can't log in as wwwuser, though can sudo su wwwwuser  
-
-
-set up cron to run run.sh in vagrantfile
-
-
-
 
 project/prerun.sh
   - npm rebuild

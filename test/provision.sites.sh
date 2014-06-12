@@ -6,7 +6,7 @@ mkdir /cumulonimbus/sites
 sudo chown --recursive wwwuser:wwwuser /cumulonimbus
 
 sudo su wwwuser
-(crontab -l ; echo '@reboot cd /cumulonimbus && ./run.sh') | crontab
+(crontab -l ; echo '@reboot cd /cumulonimbus && ./run.sh >>/var/log/cronrun-cumulonimbus 2>&1') | crontab
 
 echo "Next, run:"
 echo "    su wwwuser"
