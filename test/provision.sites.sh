@@ -5,10 +5,7 @@ git clone /vagrant /cumulonimbus
 mkdir /cumulonimbus/sites
 sudo chown --recursive wwwuser:wwwuser /cumulonimbus
 
-
-TempCronFile=$(mktemp)
-(sudo crontab -l -u wwwuser ; echo '@reboot PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin bash -c "cd /cumulonimbus && ./run.sh >>~/cronrun_cumulonimbus 2>&1"') > $TempCronFile
-sudo crontab -u wwwuser $TempCronFile
+(sudo crontab -l -u wwwuser ; echo '@reboot PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin bash -c "cd /cumulonimbus && ./run.sh >>~/cronrun_cumulonimbus 2>&1"') | crontab -u wwwuser -
 
 echo "Next, run:"
 echo "    su wwwuser"
