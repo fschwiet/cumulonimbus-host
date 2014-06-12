@@ -58,7 +58,7 @@ Vagrant.configure("2") do |config|
 		sudo chown --recursive wwwuser:wwwuser /cumulonimbus
 
 		sudo su wwwuser
-		(crontab -l ; echo '@reboot /cumulonimbus/run.sh') | crontab
+		(crontab -l ; echo '@reboot cd /cumulonimbus && ./run.sh') | crontab
 
 
 		echo "Next, run:"
