@@ -1,13 +1,4 @@
-vagrant@vagrant:~$ cat /var/log/cronrun
-  ./run.sh: 3: ./run.sh: pm2: not found
-
-
-why is crontab still being updated for root?
-  - try copying the generated root crontab to wwwuser and see if it is runs
-    (this didn't seem to work, though maybe the logfile failed to record since wwwuser does not have write access to log folder)
-
-
-
+cron job is running as root, not wwwuser.
 
 
 project/run.sh
