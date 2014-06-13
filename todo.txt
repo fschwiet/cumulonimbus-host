@@ -1,9 +1,4 @@
-pm2 list -name doesn't work as expected in run.sh
-
-
-./deploy.sh should switch versions correctly
-  - project/run.sh will need to be idempotent
-  - test
+pm2 list -name doesn't work as expected in run.sh  (its listing all processes)
 
 
 use vagrant-secret for wwwuser password
