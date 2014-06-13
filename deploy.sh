@@ -124,7 +124,7 @@ pushd $deploy_link
 
 		echo "Failure running $deploy_target/run.sh"
 
-		if [ -n $old_deploy_target]
+		if [ -n $old_deploy_target ]
 		then
 			ln -s $old_deploy_target $deploy_link
 		fi
