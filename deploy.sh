@@ -126,6 +126,7 @@ pushd $deploy_link
 
 		if [ -n $old_deploy_target ]
 		then
+			rm $deploy_link
 			ln -s $old_deploy_target $deploy_link
 		fi
 
