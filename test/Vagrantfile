@@ -31,7 +31,6 @@ def installNodejs(vm)
 	end
 end
 
-
 Vagrant.configure("2") do |config|
 
 	config.vm.box = "opscode-ubuntu-14.04"
@@ -50,7 +49,7 @@ Vagrant.configure("2") do |config|
 	config.vm.provision "shell", inline: "sudo apt-get install -y realpath"
 	config.vm.provision "shell", inline: "sudo npm install pm2 -g"
 
-	config.vm.provision "shell", path: "./provision.sites.sh"
+	config.vm.provision "shell", path: "./provision.sites.sh", args: [ "wwwuser", "password" ]
 end
 
 
