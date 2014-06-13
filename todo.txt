@@ -1,17 +1,12 @@
+pm2 list -name doesn't work as expected in run.sh
+
+
 ./deploy.sh should switch versions correctly
   - project/run.sh will need to be idempotent
   - test
 
 
-
-project/run.sh
-  - create pm2 task if it doesn't exist
-  - restart pm2 task
-
-project/prerun.sh
-  - npm rebuild
-  - migrations
-  
+use vagrant-secret for wwwuser password
 
 
 nice-to-have: store cron job in /etc/cron.d/<filename> instead of /var/spool/cron/crontabs/<username>

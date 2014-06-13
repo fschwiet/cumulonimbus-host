@@ -103,6 +103,7 @@ popd > /dev/null
 
 if [ -h $deploy_link ]
 then
+	old_deploy_target=$(realpath $deploy_link)
 	rm $deploy_link
 fi
 
@@ -115,16 +116,19 @@ then
 fi
 
 
-if ! pushd ./deploys/$name_of_site/current
-then
-	echo "Did not find current deployment"
-	exit 1
-fi
-
+pushd $deploy_link
+	
 	if ! $deploy_target/run.sh
 	then
 		popd > /dev/null
+
 		echo "Failure running $deploy_target/run.sh"
+
+		if [ -n $old_deploy_target]
+		then
+			ln -s $old_deploy_target $deploy_link
+		fi
+
 		exit 1
 	fi
 
