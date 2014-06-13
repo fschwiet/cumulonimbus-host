@@ -5,6 +5,7 @@ git clone /vagrant /cumulonimbus
 mkdir /cumulonimbus/sites
 sudo chown --recursive wwwuser:wwwuser /cumulonimbus
 
+#  It might be preferable to write to /etc/cron.d/<filename>, but I couldnt' get that to work.
 (sudo crontab -l -u wwwuser ; echo '@reboot PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin bash -c "cd /cumulonimbus && ./run.sh >>~/cronrun_cumulonimbus 2>&1"') | crontab -u wwwuser -
 
 echo "Next, run:"
