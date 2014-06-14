@@ -2,12 +2,7 @@
 use vagrant-secret for wwwuser password
 
 
-once saw ./deploy.sh sample stall on first attempt
-
-
-
-pm2 list -name doesn't work as expected in run.sh  (its listing all processes)
-
+hmm:  pm2 delete probably isn't graceful
 
 
 nice-to-have: stop using raise wrong.  See: https://github.com/mitchellh/vagrant/issues/4036 
