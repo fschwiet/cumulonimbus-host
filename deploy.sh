@@ -29,7 +29,7 @@ commit_to_deploy=${2:-"master"}
 if is_git_unclean .
 then
 	echo "There are uncommitted changes in cumulonimbus-host."
-	exit
+	exit 1
 fi
 
 src_to_deploy=./sites/$name_of_site
