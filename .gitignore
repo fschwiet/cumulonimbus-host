@@ -1,4 +1,9 @@
 test/.vagrant
+
+# configs and sites are pull from other repositories
+/configs/**
 /sites/**
+
+# deploys are created
 /deploys/**
 

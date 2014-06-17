@@ -1,12 +1,8 @@
 
-use vagrant-secret for wwwuser password
-
-
-hmm:  pm2 delete probably isn't graceful
-
 
 nice-to-have: stop using raise wrong.  See: https://github.com/mitchellh/vagrant/issues/4036 
 
+nice-to-have: check if using pm2 delete will do a graceful shutdown
 
 nice-to-have: store cron job in /etc/cron.d/<filename> instead of /var/spool/cron/crontabs/<username>
   - saw some notes that /var/spool data might get cleared, in particular when chron is updated
