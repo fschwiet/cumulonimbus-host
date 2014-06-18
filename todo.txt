@@ -1,5 +1,17 @@
+asimplereadeR:
+  remove extraMiddleware usage
+  update post/file handling
 
 
+testing workflow:
+  - developer includes their working tree / .git folder within the /vagrant folder
+  - developer must commit what they want to test first...
+  - developer starts test run
+    - [? pm2 logs are cleared]
+    - ssh is used to deploy their last commit to the VM
+    - tests run against the VM
+    - [? pm2 logs are output on test failure ]
+  
 nice-to-have: stop using raise wrong.  See: https://github.com/mitchellh/vagrant/issues/4036 
 
 nice-to-have: check if using pm2 delete will do a graceful shutdown
