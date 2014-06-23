@@ -1,0 +1,2 @@
+vagrant_dir: "."
+host_repository: "/vagrant"
