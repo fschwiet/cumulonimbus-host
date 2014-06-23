@@ -1,7 +1,3 @@
-asimplereadeR:
-  remove extraMiddleware usage
-  update post/file handling
-
 
 testing workflow:
   - developer includes their working tree / .git folder within the /vagrant folder
