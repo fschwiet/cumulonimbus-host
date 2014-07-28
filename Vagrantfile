@@ -1,6 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+syncedFolder = File.absolute_path(ENV["SyncedFolder"] || "..")
+hostGitUrl = ENV["HostGitUrl"] || "https://github.com/fschwiet/cumulonimbus-host/releases/tag/v0.0.1"
+wwwuser = ENV["wwwuserUsername"] || "wwwuser"
+wwwuserPassword = ENV["wwwuserPassword"] || "password"
 
 def aptgetUpdate(vm)
 	vm.provision :chef_solo do |chef|
@@ -40,7 +44,7 @@ Vagrant.configure("2") do |config|
 
 	config.vm.network "private_network", ip: "192.168.33.100"
 	config.vm.network "forwarded_port", guest: 8080, host: 8080
-	config.vm.synced_folder "..", "/vagrant"
+	config.vm.synced_folder syncedFolder, "/vagrant"
 
 	aptgetUpdate config.vm
 	installGit config.vm
@@ -50,7 +54,11 @@ Vagrant.configure("2") do |config|
 	config.vm.provision "shell", inline: "sudo apt-get install -y realpath"
 	config.vm.provision "shell", inline: "sudo npm install pm2 -g"
 
-	config.vm.provision "shell", path: "./provision.sites.sh", args: [ "wwwuser", Secret.wwwuser_password || "password" ]
+	config.vm.provision "shell", path: "./provision.sites.sh", args: [ 
+		wwwuser, 
+		wwwuserPassword,
+		hostGitUrl
+	]
 end
 
 
