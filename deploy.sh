@@ -71,7 +71,7 @@ then
 	mkdir ./deploys/$name_of_site
 fi
 
-commit_id=$(git --git-dir $src_to_deploy/.git rev-parse master)
+commit_id=$(git --git-dir $src_to_deploy/.git rev-parse $commit_to_deploy)
 dir_index=0
 
 while [ -d ./deploys/$name_of_site/${commit_id}_${dir_index} ]
