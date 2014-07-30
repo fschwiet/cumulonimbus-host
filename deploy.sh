@@ -33,6 +33,7 @@ then
 fi
 
 src_to_deploy=./sites/$name_of_site
+config_to_deploy=./configs/$name_of_site
 
 if ! [ -d $src_to_deploy ]
 then
@@ -85,6 +86,10 @@ deploy_link=$(realpath ./deploys/$name_of_site)/current
 mkdir $deploy_target
 git --git-dir $src_to_deploy/.git archive --format=tar $commit_to_deploy | tar --extract -C $deploy_target
 
+if [ -d $config_to_deploy ]
+then
+	cp -r $config_to_deploy/* $deploy_target
+fi
 
 if ! pushd $deploy_target > /dev/null
 then
