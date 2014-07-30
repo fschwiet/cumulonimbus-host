@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 for directory in ./deploys/*; do
    	if [ -d "$directory/current" ]; then

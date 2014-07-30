@@ -1,6 +1,4 @@
-#!/bin/sh
-
-set -e
+#!/bin/bash
 
 name_of_site=${1:?"The first parameter should indicate what site to deploy."}
 config_folder=${2:?"The second parameter should indicate what folder config files are copied from."}
