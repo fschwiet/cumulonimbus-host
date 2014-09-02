@@ -2,7 +2,8 @@
 
 for directory in ./deploys/*; do
    	if [ -d "$directory/current" ]; then
-		cd $directory/current; 
+		pushd $directory/current; 
 		./run.sh
+        popd
   	fi
 done
