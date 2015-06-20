@@ -1,4 +1,1 @@
-Related projects:
-
-* sample project - https://github.com/fschwiet/cumulonimbus-project
-* sample machine - https://github.com/fschwiet/cumulonimbus-machine
+This repository has been abandoned in favor of merging everything into https://github.com/fschwiet/cumulonimbus-machine
